@@ -20,8 +20,8 @@ jobs:
           script: |
             const issue = context.payload.issue;
 
-            // Avoid renaming if it already starts with FR-
-            if (issue.title.startsWith('FR-')) {
+            // Avoid renaming if it already starts with US-
+            if (issue.title.startsWith('US-')) {
               return;
             }
 
