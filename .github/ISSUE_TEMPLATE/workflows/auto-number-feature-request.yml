@@ -1,0 +1,35 @@
+name: Auto-number feature requests
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  rename-feature-request:
+    runs-on: ubuntu-latest
+
+    if: contains(github.event.issue.labels.*.name, 'enhancement')
+
+    steps:
+      - name: Rename issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+
+            // Avoid renaming if it already starts with FR-
+            if (issue.title.startsWith('FR-')) {
+              return;
+            }
+
+            const newTitle = `US-${issue.number}: ${issue.title}`;
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              title: newTitle
+            });
