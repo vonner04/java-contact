@@ -1,3 +1,4 @@
+package io.github.vonner04.contact_game.domain;
 public class RoomSettings {
     private int maxPlayers;
     private int minWordLength;

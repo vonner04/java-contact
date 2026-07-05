@@ -1,3 +1,7 @@
+package io.github.vonner04.contact_game.domain;
+
+import java.util.List;
+
 public class Room {
     private final String id;
     private final String roomCode;

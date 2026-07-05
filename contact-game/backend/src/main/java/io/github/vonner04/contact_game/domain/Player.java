@@ -1,3 +1,4 @@
+package io.github.vonner04.contact_game.domain;
 public class Player {
     private String id;
     private String name;
@@ -10,7 +11,7 @@ public class Player {
     }
     public void setId(String id) {
         this.id = id;
-        
+
     }
     public String getName() {
         return name;
