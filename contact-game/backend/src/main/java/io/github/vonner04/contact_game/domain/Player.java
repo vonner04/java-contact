@@ -6,6 +6,11 @@ public class Player {
     private GameRole gameRole;
     private PlayerStatus status;
 
+    public Player(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

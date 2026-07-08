@@ -12,6 +12,14 @@ public class Room {
     private RoomSettings settings;
     private RoomState state;
     
+    public Room(String id, String roomCode, String hostPlayerId, List<Player> players, RoomSettings settings) {
+        this.id = id;
+        this. roomCode = roomCode;
+        this.hostPlayerId = hostPlayerId;
+        this.players = players;
+        this.settings = settings;
+    }
+    
     public String getId() {
         return id;
     }
