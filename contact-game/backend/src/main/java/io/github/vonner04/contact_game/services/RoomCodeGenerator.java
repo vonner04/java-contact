@@ -4,6 +4,9 @@ import java.security.SecureRandom;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Generates uppercase alphanumeric room code of length {@value #CODE_LENGTH}
+ */
 @Component
 public class RoomCodeGenerator {
     private static final String UPPER_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
