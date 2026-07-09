@@ -28,5 +28,5 @@ public interface RoomStore extends Store<Room, String> {
      */
     Collection<Room> findExpiredRooms();
 
-    Optional<Room> findRoomByHostPlayerID(String hostPlayerID);
+    Optional<Room> findRoomByHostPlayerId(String hostPlayerID);
 }

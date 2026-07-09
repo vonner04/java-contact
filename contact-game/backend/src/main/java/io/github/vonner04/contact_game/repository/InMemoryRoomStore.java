@@ -5,8 +5,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.stereotype.Repository;
+
 import io.github.vonner04.contact_game.domain.Room;
 
+@Repository
 public class InMemoryRoomStore implements RoomStore {
 
     private final Map<String, Room> activeRooms = new ConcurrentHashMap<>();
@@ -43,7 +46,7 @@ public class InMemoryRoomStore implements RoomStore {
     }
 
     @Override
-    public Optional<Room> findRoomByHostPlayerID(String hostPlayerID) {
+    public Optional<Room> findRoomByHostPlayerId(String hostPlayerID) {
         return activeRooms.values().stream().filter(room -> room.getHostPlayerId().equals(hostPlayerID)).findFirst();
     }
     

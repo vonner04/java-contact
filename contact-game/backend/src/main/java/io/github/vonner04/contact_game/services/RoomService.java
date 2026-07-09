@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import io.github.vonner04.contact_game.domain.Player;
 import io.github.vonner04.contact_game.domain.Room;
 import io.github.vonner04.contact_game.domain.RoomSettings;
+import io.github.vonner04.contact_game.domain.RoomState;
 import io.github.vonner04.contact_game.dtos.CreateRoomRequest;
 import io.github.vonner04.contact_game.dtos.CreateRoomResponse;
 import io.github.vonner04.contact_game.repository.RoomStore;
@@ -52,6 +53,7 @@ public class RoomService {
         String roomCode = codeGenerator.generateRoomCode();
 
         Room room = new Room(roomId, roomCode, hostPlayerId, List.of(host), defaultSettings);
+        room.setState(RoomState.LOBBY);
 
         store.save(room);
 
