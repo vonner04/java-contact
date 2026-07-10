@@ -10,8 +10,12 @@ import io.github.vonner04.contact_game.domain.Room;
  */
 public interface RoomStore extends Store<Room, String> {
 
+    Optional<Room> findByRoomCode(String roomCode);
+
+    boolean existsByRoomCode(String roomCode);
+
     /**
-     * TODO: designing for expired rooms 
+     * TODO: designing for expired rooms
      * 1) StoredRoom class contains Room object and timestamp metadata?
      * 2) Emitting Events?
      */
@@ -21,7 +25,8 @@ public interface RoomStore extends Store<Room, String> {
      * 
      * Conditions:
      * 1) A room with no connected players
-     * 2) A room that has been inactive for too long (No status changes after 30mins)
+     * 2) A room that has been inactive for too long (No status changes after
+     * 30mins)
      * 3) A room past its allowed lifetime of (5hours)
      * 
      * @return a collection of rooms that should be removed from active storage
