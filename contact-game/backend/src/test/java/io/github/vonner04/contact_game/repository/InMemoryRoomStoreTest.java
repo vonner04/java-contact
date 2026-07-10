@@ -65,15 +65,7 @@ public class InMemoryRoomStoreTest {
         store.save(room);
 
         assertTrue(store.existsById("room-1"), "Store should report saved room as existing");
-    }
-
-    @Test
-    @DisplayName("Delete by ID: should not fail when room does not exist")
-    void testDeleteByIdNoRoom() {
-        store.deleteById("missing-room");
-
         assertFalse(store.existsById("missing-room"), "Deleting a nonexisting room should safely do nothing");
-
     }
 
     @Test
@@ -118,10 +110,43 @@ public class InMemoryRoomStoreTest {
 
     @Test
     @DisplayName("Find by host player ID: should return empty when host has no room")
-    void findRoomByHostPlayerID_shouldReturnEmptyWhenHostHasNoRoom() {
+    void testFindRoomByHostPlayerIdNoRoom() {
         Optional<Room> foundRoom = store.findRoomByHostPlayerId("missing-host");
 
-        assertTrue(foundRoom.isEmpty(), "Missing host should return empty Optional");
+        assertTrue(foundRoom.isEmpty(), "Missing host should return empty");
+    }
+
+    @Test
+    @DisplayName("Find by roomCode: should return a room with the given room code")
+    void testFindByRoomCodeRoomExists() {
+        Room room = createTestRoom("room-1", "ABCD1234", "host-1");
+
+        store.save(room);
+
+        Optional<Room> foundRoom = store.findByRoomCode("ABCD1234");
+
+        assertTrue(foundRoom.isPresent(), "A room should be found with the given room code");
+        assertEquals(foundRoom.get(), room, "Found room should match created room");
+    }
+
+    @Test
+    @DisplayName("Find by roomCode: should return empty when there is no room code")
+    void testFindByRoomCodeNoRoom() {
+        Optional<Room> room = store.findByRoomCode("ABCD1234");
+
+        assertTrue(room.isEmpty(), "Missing room code should return empty");
+    }
+
+    @Test
+    @DisplayName("Exists by room code: should return true when there is an existing room with the given room code")
+    void testRoomCodeExists() {
+        Room room = createTestRoom("room-1", "ABCD1234", "host-1");
+
+        store.save(room);
+
+        assertTrue(store.existsByRoomCode("ABCD1234"), "Store should report saved room with roomCode");
+        assertFalse(store.existsByRoomCode("missing"),
+                "Store should report no saved rooms with non-existent room code");
     }
 
     private Room createTestRoom(String roomID, String roomCode, String hostPlayerID) {

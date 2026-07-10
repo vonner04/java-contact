@@ -18,7 +18,7 @@ public class InMemoryRoomStore implements RoomStore {
     @Override
     public void save(Room item) {
         activeRooms.put(item.getId(), item);
-        roomIdsByCode.put(item.getId(), item.getRoomCode());
+        roomIdsByCode.put(item.getRoomCode(), item.getId());
     }
 
     @Override
