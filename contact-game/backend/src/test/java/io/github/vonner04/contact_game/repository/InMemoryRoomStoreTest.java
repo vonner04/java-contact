@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import io.github.vonner04.contact_game.domain.LobbyRole;
 import io.github.vonner04.contact_game.domain.Player;
 import io.github.vonner04.contact_game.domain.Room;
 import io.github.vonner04.contact_game.domain.RoomSettings;
@@ -150,10 +151,10 @@ public class InMemoryRoomStoreTest {
     }
 
     private Room createTestRoom(String roomID, String roomCode, String hostPlayerID) {
-        Player host = new Player(hostPlayerID, "Host");
+        Player host = new Player(hostPlayerID, "Host", LobbyRole.HOST);
         RoomSettings settings = new RoomSettings();
 
-        return new Room(roomID, roomCode, hostPlayerID, List.of(host), settings);
+        return new Room(roomID, roomCode, host, hostPlayerID, List.of(host), settings);
     }
 
 }
