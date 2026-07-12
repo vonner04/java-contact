@@ -2,6 +2,8 @@ package io.github.vonner04.contact_game.domain;
 
 import java.util.List;
 
+import io.github.vonner04.contact_game.exceptions.RoomFullException;
+
 public class Room {
     private final String id;
     private final String roomCode;
@@ -12,9 +14,11 @@ public class Room {
     private RoomSettings settings;
     private RoomState state;
 
-    public Room(String id, String roomCode, String hostPlayerId, List<Player> players, RoomSettings settings) {
+    public Room(String id, String roomCode, Player host, String hostPlayerId, List<Player> players,
+            RoomSettings settings) {
         this.id = id;
         this.roomCode = roomCode;
+        this.host = host;
         this.hostPlayerId = hostPlayerId;
         this.players = players;
         this.settings = settings;
@@ -45,6 +49,9 @@ public class Room {
     }
 
     public void addPlayer(Player player) {
+        if (isFull()) {
+            throw new RoomFullException("The room" + roomCode + "is full");
+        }
         players.add(player);
     }
 
@@ -78,5 +85,9 @@ public class Room {
 
     public void setState(RoomState state) {
         this.state = state;
+    }
+
+    public boolean isFull() {
+        return players.size() >= settings.getMaxPlayers();
     }
 }
