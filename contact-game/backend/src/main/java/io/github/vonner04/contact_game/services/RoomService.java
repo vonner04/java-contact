@@ -15,7 +15,6 @@ import io.github.vonner04.contact_game.dtos.CreateRoomRequest;
 import io.github.vonner04.contact_game.dtos.CreateRoomResponse;
 import io.github.vonner04.contact_game.dtos.JoinRoomRequest;
 import io.github.vonner04.contact_game.dtos.JoinRoomResponse;
-import io.github.vonner04.contact_game.exceptions.RoomFullException;
 import io.github.vonner04.contact_game.exceptions.RoomNotFoundException;
 import io.github.vonner04.contact_game.repository.RoomStore;
 
@@ -85,7 +84,8 @@ public class RoomService {
      * 
      * @param request the join request containing room code and player name
      * @return A response containing the room id and new player's id if a room is
-     *         found or else throw an IllegalArgumentException
+     *         found or else throw a 404 Not Found, if the room is full throw a 409
+     *         Conflict
      */
     public JoinRoomResponse joinRoom(JoinRoomRequest request) {
 
