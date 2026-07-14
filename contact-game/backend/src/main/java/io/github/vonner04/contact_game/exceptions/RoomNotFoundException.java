@@ -1,6 +1,6 @@
 package io.github.vonner04.contact_game.exceptions;
 
-public class RoomNotFoundException extends IllegalArgumentException {
+public class RoomNotFoundException extends RuntimeException {
 
     public RoomNotFoundException() {
         super();
