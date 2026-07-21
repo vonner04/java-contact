@@ -1,17 +1,18 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Button, View } from "react-native";
 
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
+    <View className='w-full h-full flex items-center justify-center gap-y-4 bg-slate-400'>
+      <Button
+        title='Create Room'
+        onPress={() => console.log("change to username form page")}
+      />
+      <Button
+        title='Join Room'
+        onPress={() =>
+          console.log("change to room code form page then username form page")
+        }
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
